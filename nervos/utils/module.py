@@ -321,9 +321,9 @@ class Module:
                                     next_neuron_idx,
                                     synapse_memory,
                                 )
-                    if plotting:
-                        # weight_evolution_for_one_spike_train.append(self.layers[position].synapses.copy())
-                        ...
+                    if self.get_weight_evolution and plotting:
+                        weight_evolution_for_one_spike_train.append(self.layers[position].synapses.copy())
+                        
             self.layers[position].update_neuron_potential_memories()
             if plotting:
                 layer_potentials_for_one_spike_train.append(
