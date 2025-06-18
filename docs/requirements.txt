@@ -15,3 +15,4 @@ defusedxml==0.7.1
 Jinja2==3.1.6
 docutils==0.21.2
 Pygments==2.19.1
+nervos==0.0.4
