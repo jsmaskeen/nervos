@@ -14,7 +14,7 @@ training workflows.
 
 from ..utils import *
 from .loader import Dataloader
-from keras.src.datasets.mnist import load_data
+from sklearn.datasets import fetch_openml
 from typing import Union
 from scipy.fft import dct, idct
 from sklearn.decomposition import PCA
@@ -50,7 +50,10 @@ class MNISTLoader(Dataloader):
         super().__init__(parameters)
         self.parameters = parameters
         logger.info("Loading Raw Data")
-        (self.X_train, self.Y_train), (self.X_test, self.Y_test) = load_data()
+        mnist__ = fetch_openml('mnist_784', version=1)
+        X__ = np.array(mnist__.data, dtype="uint8").reshape(-1, 28, 28)
+        y__ = np.array(mnist__.target, dtype="int64")
+        (self.X_train, self.Y_train), (self.X_test, self.Y_test) = (X__[:60000], y__[:60000]), (X__[60000:], y__[60000:])
         if len(classes) != 0:
             train_filter = np.isin(self.Y_train, classes)
             self.X_train = self.X_train[train_filter]
