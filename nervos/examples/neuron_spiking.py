@@ -4,23 +4,30 @@ import matplotlib.gridspec as gridspec
 
 class ExampleCurrentThroughLIFNeuron:
     """
-    Example demonstrating the simulation of current passing through a Leaky Integrate-and-Fire (LIF) neuron.
+    Simulates current injection into a Leaky Integrate-and-Fire (LIF) neuron.
 
-    The class simulates the behavior of a single LIF neuron under an input current pulse and visualizes the resulting membrane potential and input current over time.
+    This class models the response of a single LIF neuron to a square current pulse
+    and visualizes the resulting membrane potential and input current over time.
 
     Attributes:
-        parameters (Parameters): Configuration parameters for the neuron, such as resting potential, spike threshold, and conductance.
-        neuron (LIFNeuron): Instance of the LIFNeuron class, representing the spiking neuron.
-        dt (float): Time step (in ms) used for the simulation.
-        simulation_duration (int): Total duration (in ms) for the simulation.
-        clock (np.ndarray): Time vector that spans the duration of the simulation.
-
-    Methods:
-        simulate_pulse(current_magnitude): Simulates the response of the LIF neuron to a current pulse, calculates membrane potential over time, and plots the results.
-            current_magnitude (float): The magnitude of the current pulse (in nA) applied to the neuron.
+        parameters (Parameters): Configuration for the neuron (resting potential, threshold, etc.).
+        neuron (LIFNeuron): Instance of the LIF neuron.
+        dt (float): Simulation time step in milliseconds.
+        simulation_duration (int): Total simulation time in milliseconds.
+        clock (np.ndarray): Discrete time steps for the simulation.
     """
 
     def __init__(self, parameters):
+        """
+        Initializes the ExampleCurrentThroughLIFNeuron with simulation parameters.
+
+        Sets up the LIF neuron model, simulation time step, total duration,
+        and generates the simulation time vector.
+
+        Args:
+            parameters (Parameters): An instance containing neuron parameters such as
+                resting potential, spike threshold, conductance, refractory time, etc.
+        """
         self.parameters = parameters
         self.neuron = LIFNeuron(parameters)
         self.dt = 0.1
@@ -28,6 +35,18 @@ class ExampleCurrentThroughLIFNeuron:
         self.clock = np.arange(0, self.simulation_duration, self.dt)
 
     def simulate_pulse(self, current_magnitude):
+        """
+        Simulates the response of the LIF neuron to a square current pulse.
+
+        A current of specified magnitude is applied briefly during the simulation.
+        The resulting membrane potential and input current are plotted.
+
+        Args:
+            current_magnitude (float): Magnitude of the input current in nanoamperes (nA).
+
+        Returns:
+            None
+        """
         V = np.zeros(self.clock.size)
         V[0] = self.parameters.resting_potential
         I = current_magnitude * np.ones(self.clock.size)

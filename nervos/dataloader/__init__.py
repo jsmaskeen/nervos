@@ -1,12 +1,12 @@
 """
 This package provides classes and methods for loading, preprocessing, and 
-managing datasets, with a focus on Spiking Neural Network (SNN) applications. 
+managing datasets, with a focus on Spiking Neural Network (SNN) applications.
 
-Modules:
-- loader: Base dataloader class for custom datasets.
-- mnist_loader: MNIST-specific dataloader with SNN preprocessing support.
-- circles_loader: Non linear circles-specific dataloader with SNN preprocessing support.
-- iris_loader: Iris-specific dataloader with SNN preprocessing support.
+Submodules:
+    mnist: MNIST-specific dataloader with SNN preprocessing support.
+    loader: Base dataloader class for custom datasets.
+    circles: Non-linear circle dataset loader with SNN preprocessing support.
+    iris: Iris dataset loader with SNN preprocessing support.
 """
 
 from .mnist import *

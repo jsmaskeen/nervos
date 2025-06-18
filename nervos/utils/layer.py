@@ -37,7 +37,7 @@ class Layer:
             num_input_neurons (int): Number of input neurons to the layer.
             num_output_neurons (int): Number of output neurons in the layer.
         """
-        self.parameters = Parameters
+        self.parameters = parameters
         self.layer = [LIFNeuron(parameters) for _ in range(num_output_neurons)]
         self.synapses = np.ones((num_output_neurons, num_input_neurons)) #np.random.random((num_output_neurons, num_input_neurons)) #
         self.num_input_neurons = num_input_neurons

@@ -3,7 +3,7 @@ This package implements a spiking neural network (SNN) framework, which includes
 
 The package provides a structure for creating and training a spiking neural network using biologically inspired spiking neurons, such as the Leaky Integrate-and-Fire (LIF) neuron model, and implements spike-timing dependent plasticity (STDP) for learning. It is composed of multiple modules and helper functions to support various operations like layer initialization, network training, data handling, and parameter management.
 
-Modules:
+Submodules:
     - common.py: Provides utility functions for logging, time tracking, file handling, and model saving/loading.
     - layer.py: Contains the `Layer` class, which represents a layer in the network. It manages the list of neurons and synapses between them.
     - module.py: Implements the main `Module` class, which manages the overall spiking neural network, including training, testing, and synapse updates.

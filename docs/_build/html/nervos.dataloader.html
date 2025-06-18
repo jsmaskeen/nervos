@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>nervos.dataloader package &#8212; nervos 0.0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=e3a6060d"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nervos.dataloader';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="nervos.examples package" href="nervos.examples.html" />
+    <link rel="prev" title="nervos package" href="nervos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">nervos 0.0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    nervos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    nervos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="nervos.html">nervos package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">nervos.dataloader package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nervos.examples.html">nervos.examples package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nervos.utils.html">nervos.utils package</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">nervos</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="nervos.html" class="nav-link">nervos package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">nervos.dataloader package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="nervos-dataloader-package">
+<h1>nervos.dataloader package<a class="headerlink" href="#nervos-dataloader-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-nervos.dataloader.circles">
+<span id="nervos-dataloader-circles-module"></span><h2>nervos.dataloader.circles module<a class="headerlink" href="#module-nervos.dataloader.circles" title="Link to this heading">#</a></h2>
+<p>This module implements the <cite>CirclesLoader</cite> class, which extends the <cite>Dataloader</cite>
+base class. It is specifically designed to handle scikit-learn’s circle toy dataset, and
+provides methods for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Loading data</p></li>
+<li><p>Converting points into spike trains using Gaussian receptive fields</p></li>
+<li><p>Retrieving train and test data</p></li>
+</ul>
+</div></blockquote>
+<p>The <cite>CirclesLoader</cite> supports preprocessing for Spiking Neural Network (SNN)
+training workflows.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nervos.dataloader.circles.</span></span><span class="sig-name descname"><span class="pre">CirclesLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters"><span class="pre">Parameters</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nervos/dataloader/circles.html#CirclesLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nervos.dataloader.loader.Dataloader" title="nervos.dataloader.loader.Dataloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataloader</span></code></a></p>
+<p>A dataloader class specifically designed for loading and preprocessing the make_circles dataset.</p>
+<p>This class provides functionality for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Loading the dataset</p></li>
+<li><p>Normalizing coordinates</p></li>
+<li><p>Encoding coordinates into Gaussian probabilities</p></li>
+<li><p>Generating spike trains based on Poisson processes</p></li>
+<li><p>A dataloader method for retrieving data samples</p></li>
+</ul>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.parameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration parameters for the loader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters">Parameters</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.noise">
+<span class="sig-name descname"><span class="pre">noise</span></span><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.noise" title="Link to this definition">#</a></dt>
+<dd><p>Standard deviation of Gaussian noise added to the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.factor">
+<span class="sig-name descname"><span class="pre">factor</span></span><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.factor" title="Link to this definition">#</a></dt>
+<dd><p>Scale factor between the inner and outer circle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.dataloader">
+<span class="sig-name descname"><span class="pre">dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nervos/dataloader/circles.html#CirclesLoader.dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.dataloader" title="Link to this definition">#</a></dt>
+<dd><p>Loads and preprocesses the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>bool</em><em>, </em><em>optional</em>) – Placeholder for train/test split. Defaults to True.</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to load. Defaults to None (all samples).</p></li>
+<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to preprocess the data into spike trains. Defaults to False.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Seed for reproducibility. Defaults to 42.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Preprocessed data and labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.encode_coordinates">
+<span class="sig-name descname"><span class="pre">encode_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/circles.html#CirclesLoader.encode_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.encode_coordinates" title="Link to this definition">#</a></dt>
+<dd><p>Encodes a coordinate into Gaussian probabilities for each neuron.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>np.ndarray</em>) – A 2D point (x, y) to encode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Encoded probabilities for each neuron.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.generate_poisson_spikes">
+<span class="sig-name descname"><span class="pre">generate_poisson_spikes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spike_probs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/circles.html#CirclesLoader.generate_poisson_spikes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.generate_poisson_spikes" title="Link to this definition">#</a></dt>
+<dd><p>Generates Poisson spike trains for a given probability distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spike_probs</strong> (<em>np.ndarray</em>) – Probabilities for each neuron to fire.</p></li>
+<li><p><strong>time_steps</strong> (<em>int</em>) – Number of time steps for the spike train.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Spike trains for all neurons.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.circles.CirclesLoader.plot_rf">
+<span class="sig-name descname"><span class="pre">plot_rf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/circles.html#CirclesLoader.plot_rf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.circles.CirclesLoader.plot_rf" title="Link to this definition">#</a></dt>
+<dd><p>Plots the receptive fields and covered area.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nervos.dataloader.iris">
+<span id="nervos-dataloader-iris-module"></span><h2>nervos.dataloader.iris module<a class="headerlink" href="#module-nervos.dataloader.iris" title="Link to this heading">#</a></h2>
+<p>This module implements the <cite>IrisLoader</cite> class, which extends the <cite>Dataloader</cite>
+base class. It is specifically designed to handle the Iris dataset, providing
+methods for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Loading the dataset</p></li>
+<li><p>Generating more synthetic data in the dataset</p></li>
+<li><p>Converting samples into spike trains</p></li>
+</ul>
+</div></blockquote>
+<p>The <cite>IrisLoader</cite> supports preprocessing for Spiking Neural Network (SNN)
+training workflows.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nervos.dataloader.iris.</span></span><span class="sig-name descname"><span class="pre">IrisLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters"><span class="pre">Parameters</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nervos.dataloader.loader.Dataloader" title="nervos.dataloader.loader.Dataloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataloader</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader.dataloader">
+<span class="sig-name descname"><span class="pre">dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader.dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader.dataloader" title="Link to this definition">#</a></dt>
+<dd><p>Loads and optionally preprocesses the Iris dataset for SNN training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to load (for test set only).</p></li>
+<li><p><strong>train</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to load training or test data. Defaults to True.</p></li>
+<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to convert features into spike trains. Defaults to False.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed for reproducibility. Defaults to 42.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature matrix and labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader.encode_coordinates">
+<span class="sig-name descname"><span class="pre">encode_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader.encode_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader.encode_coordinates" title="Link to this definition">#</a></dt>
+<dd><p>Encodes a given feature vector using Gaussian receptive fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>np.ndarray</em>) – Feature vector to encode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Encoded representation using Gaussian functions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader.fluff_data">
+<span class="sig-name descname"><span class="pre">fluff_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples_per_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader.fluff_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader.fluff_data" title="Link to this definition">#</a></dt>
+<dd><p>Generates additional synthetic data by adding noise to the existing samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>samples_per_class</strong> (<em>int</em>) – Number of synthetic samples to generate per class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader.generate_data">
+<span class="sig-name descname"><span class="pre">generate_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader.generate_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader.generate_data" title="Link to this definition">#</a></dt>
+<dd><p>Generates a new dataset with balanced classes using Gaussian-distributed noise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>total_samples</strong> (<em>int</em>) – Total number of samples to generate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generated feature matrix and corresponding labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader.generate_poisson_spikes">
+<span class="sig-name descname"><span class="pre">generate_poisson_spikes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spike_probs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader.generate_poisson_spikes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader.generate_poisson_spikes" title="Link to this definition">#</a></dt>
+<dd><p>Converts encoded feature vectors into Poisson-distributed spike trains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spike_probs</strong> (<em>np.ndarray</em>) – Probability values for spike generation.</p></li>
+<li><p><strong>time_steps</strong> (<em>int</em>) – Number of time steps for the spike train.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Spike train representation of the input.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.iris.IrisLoader.normalise">
+<span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/iris.html#IrisLoader.normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.iris.IrisLoader.normalise" title="Link to this definition">#</a></dt>
+<dd><p>Normalizes the dataset features to the range [0, 1].</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nervos.dataloader.loader">
+<span id="nervos-dataloader-loader-module"></span><h2>nervos.dataloader.loader module<a class="headerlink" href="#module-nervos.dataloader.loader" title="Link to this heading">#</a></h2>
+<p>This module contains the base <cite>Dataloader</cite> class, which provides the foundation
+for implementing custom dataloaders for various datasets. It primarily serves as
+a blueprint for creating data loading mechanisms.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nervos.dataloader.loader.Dataloader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nervos.dataloader.loader.</span></span><span class="sig-name descname"><span class="pre">Dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters"><span class="pre">Parameters</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nervos/dataloader/loader.html#Dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.loader.Dataloader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A base class for creating a dataloader.</p>
+<p>This class serves as a blueprint for implementing dataloaders to handle
+data loading tasks. It is initialized with a <cite>Parameters</cite> object containing
+configuration details.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.loader.Dataloader.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#nervos.dataloader.loader.Dataloader.parameters" title="Link to this definition">#</a></dt>
+<dd><p>An object encapsulating the parameters required
+for the dataloader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters">Parameters</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.loader.Dataloader.dataloader">
+<span class="sig-name descname"><span class="pre">dataloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/loader.html#Dataloader.dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.loader.Dataloader.dataloader" title="Link to this definition">#</a></dt>
+<dd><p>Placeholder method for loading data.</p>
+<p>This method should be overridden by subclasses to define the specific
+data loading logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nervos.dataloader.mnist">
+<span id="nervos-dataloader-mnist-module"></span><h2>nervos.dataloader.mnist module<a class="headerlink" href="#module-nervos.dataloader.mnist" title="Link to this heading">#</a></h2>
+<p>This module implements the <cite>MNISTLoader</cite> class, which extends the <cite>Dataloader</cite>
+base class. It is specifically designed to handle the MNIST dataset, providing
+methods for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Loading and filtering digit classes</p></li>
+<li><p>Normalizing images</p></li>
+<li><p>Converting images into spike trains</p></li>
+<li><p>Retrieving balanced or random samples</p></li>
+</ul>
+</div></blockquote>
+<p>The <cite>MNISTLoader</cite> supports preprocessing for Spiking Neural Network (SNN)
+training workflows.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nervos.dataloader.mnist.</span></span><span class="sig-name descname"><span class="pre">MNISTLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters"><span class="pre">Parameters</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8,</span> <span class="pre">9]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nervos.dataloader.loader.Dataloader" title="nervos.dataloader.loader.Dataloader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataloader</span></code></a></p>
+<p>A dataloader class specifically designed for loading and preprocessing the MNIST dataset.</p>
+<p>This class extends the <cite>Dataloader</cite> base class and provides functionality
+for loading MNIST data, normalizing images, converting images into spike
+trains, and retrieving balanced or random samples.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.parameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration parameters for the loader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="nervos.utils.html#nervos.utils.parameters.Parameters" title="nervos.utils.parameters.Parameters">Parameters</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.classes">
+<span class="sig-name descname"><span class="pre">classes</span></span><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.classes" title="Link to this definition">#</a></dt>
+<dd><p>List of digit classes to include in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.X_train">
+<span class="sig-name descname"><span class="pre">X_train</span></span><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.X_train" title="Link to this definition">#</a></dt>
+<dd><p>Training images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.Y_train">
+<span class="sig-name descname"><span class="pre">Y_train</span></span><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.Y_train" title="Link to this definition">#</a></dt>
+<dd><p>Training labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.X_test">
+<span class="sig-name descname"><span class="pre">X_test</span></span><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.X_test" title="Link to this definition">#</a></dt>
+<dd><p>Testing images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.Y_test">
+<span class="sig-name descname"><span class="pre">Y_test</span></span><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.Y_test" title="Link to this definition">#</a></dt>
+<dd><p>Testing labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.compress_image">
+<span class="sig-name descname"><span class="pre">compress_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.compress_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.compress_image" title="Link to this definition">#</a></dt>
+<dd><p>Compress image by keeping top block of m x m = k coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>np.ndarray</em>) – 2D numpy array (e.g. 28x28 for MNIST)</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of coefficients to keep.</p></li>
+<li><p><strong>sqrt</strong> (<em>(</em><em>k must be chosen so that</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DCT coefficient matrix with only the top-left m x m block kept.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.dataloader">
+<span class="sig-name descname"><span class="pre">dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_single</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.dataloader" title="Link to this definition">#</a></dt>
+<dd><p>Loads and preprocesses the MNIST dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to load training or testing data. Defaults to True.</p></li>
+<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to preprocess the data into spike trains. Defaults to False.</p></li>
+<li><p><strong>random_single</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return a single random sample. Defaults to False.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Seed for reproducibility. Defaults to 42.</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to load. Defaults to None.</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – The top k features to keep after taking DCT of the image. Defaults to None means take the whole image.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – Used only if DCT is used. The threshold below which all pixel values will be zero after normalization. Defaults to 0.5</p></li>
+<li><p><strong>pca</strong> (<em>bool</em>) – If compression should happen according to PCA.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Preprocessed data and labels, or a single random sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray or tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.get_random_image">
+<span class="sig-name descname"><span class="pre">get_random_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_spike_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.get_random_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.get_random_image" title="Link to this definition">#</a></dt>
+<dd><p>Retrieves a random image and its label from the training dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>get_spike_train</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return the spike train of the image. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the image, label, and optionally the spike train.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.image2dct2image">
+<span class="sig-name descname"><span class="pre">image2dct2image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.image2dct2image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.image2dct2image" title="Link to this definition">#</a></dt>
+<dd><p>Compresses the image, then keeps top k DCT features, then uncompresses the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>np.ndarray</em>) – 2D numpy array (e.g. 28x28 for MNIST)</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of coefficients to keep.</p></li>
+<li><p><strong>sqrt</strong> (<em>(</em><em>k must be chosen so that</em>)</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – The threshold below which all pixel values will be zero after normalization. Defaults to 0.5</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The DCT coefficient matrix with only the top-left m x m = k block kept.
+np.ndarray: The top k DCT features uncompressed image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.img2spiketrain">
+<span class="sig-name descname"><span class="pre">img2spiketrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.img2spiketrain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.img2spiketrain" title="Link to this definition">#</a></dt>
+<dd><p>Converts a normalized image into a spike train representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>np.ndarray</em>) – The normalized image.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The spike train representation of the image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.load_balanced_mnist">
+<span class="sig-name descname"><span class="pre">load_balanced_mnist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.load_balanced_mnist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.load_balanced_mnist" title="Link to this definition">#</a></dt>
+<dd><p>Balances the dataset by selecting an equal number of samples for each label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> (<em>np.ndarray</em>) – The labels of the dataset.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em>) – Total number of samples to select.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Seed for reproducibility. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Indices of the selected samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.normalise">
+<span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.normalise" title="Link to this definition">#</a></dt>
+<dd><p>Normalizes an image to the range [0, 1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>np.ndarray</em>) – The image to normalize.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The normalized image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nervos.dataloader.mnist.MNISTLoader.uncompress_image">
+<span class="sig-name descname"><span class="pre">uncompress_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/nervos/dataloader/mnist.html#MNISTLoader.uncompress_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nervos.dataloader.mnist.MNISTLoader.uncompress_image" title="Link to this definition">#</a></dt>
+<dd><p>Given the (possibly sparsified) DCT coefficients, reconstruct the image using the inverse DCT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>np.ndarray</em>) – 2D numpy array.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of coefficients to keep.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – The threshold below which all pixel values will be zero after normalization. Defaults to 0.5</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The uncompressed image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nervos.dataloader">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nervos.dataloader" title="Link to this heading">#</a></h2>
+<p>This package provides classes and methods for loading, preprocessing, and
+managing datasets, with a focus on Spiking Neural Network (SNN) applications.</p>
+<dl class="simple">
+<dt>Submodules:</dt><dd><p>mnist: MNIST-specific dataloader with SNN preprocessing support.
+loader: Base dataloader class for custom datasets.
+circles: Non-linear circle dataset loader with SNN preprocessing support.
+iris: Iris dataset loader with SNN preprocessing support.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nervos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">nervos package</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nervos.examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">nervos.examples package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-nervos.dataloader.circles">nervos.dataloader.circles module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader"><code class="docutils literal notranslate"><span class="pre">CirclesLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.parameters"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.parameters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.noise"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.noise</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.factor"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.factor</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.dataloader"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.dataloader()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.encode_coordinates"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.encode_coordinates()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.generate_poisson_spikes"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.generate_poisson_spikes()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.circles.CirclesLoader.plot_rf"><code class="docutils literal notranslate"><span class="pre">CirclesLoader.plot_rf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-nervos.dataloader.iris">nervos.dataloader.iris module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader"><code class="docutils literal notranslate"><span class="pre">IrisLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader.dataloader"><code class="docutils literal notranslate"><span class="pre">IrisLoader.dataloader()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader.encode_coordinates"><code class="docutils literal notranslate"><span class="pre">IrisLoader.encode_coordinates()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader.fluff_data"><code class="docutils literal notranslate"><span class="pre">IrisLoader.fluff_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader.generate_data"><code class="docutils literal notranslate"><span class="pre">IrisLoader.generate_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader.generate_poisson_spikes"><code class="docutils literal notranslate"><span class="pre">IrisLoader.generate_poisson_spikes()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.iris.IrisLoader.normalise"><code class="docutils literal notranslate"><span class="pre">IrisLoader.normalise()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-nervos.dataloader.loader">nervos.dataloader.loader module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.loader.Dataloader"><code class="docutils literal notranslate"><span class="pre">Dataloader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.loader.Dataloader.parameters"><code class="docutils literal notranslate"><span class="pre">Dataloader.parameters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.loader.Dataloader.dataloader"><code class="docutils literal notranslate"><span class="pre">Dataloader.dataloader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-nervos.dataloader.mnist">nervos.dataloader.mnist module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader"><code class="docutils literal notranslate"><span class="pre">MNISTLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.parameters"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.parameters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.classes"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.classes</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.X_train"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.X_train</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.Y_train"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.Y_train</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.X_test"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.X_test</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.Y_test"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.Y_test</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.compress_image"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.compress_image()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.dataloader"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.dataloader()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.get_random_image"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.get_random_image()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.image2dct2image"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.image2dct2image()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.img2spiketrain"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.img2spiketrain()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.load_balanced_mnist"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.load_balanced_mnist()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.normalise"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.normalise()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nervos.dataloader.mnist.MNISTLoader.uncompress_image"><code class="docutils literal notranslate"><span class="pre">MNISTLoader.uncompress_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-nervos.dataloader">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/nervos.dataloader.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Jaskirat Singh Maskeen.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

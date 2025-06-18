@@ -2,10 +2,11 @@
 This module implements the `MNISTLoader` class, which extends the `Dataloader` 
 base class. It is specifically designed to handle the MNIST dataset, providing 
 methods for:
-- Loading and filtering digit classes
-- Normalizing images
-- Converting images into spike trains
-- Retrieving balanced or random samples
+
+    - Loading and filtering digit classes
+    - Normalizing images
+    - Converting images into spike trains
+    - Retrieving balanced or random samples
 
 The `MNISTLoader` supports preprocessing for Spiking Neural Network (SNN) 
 training workflows.

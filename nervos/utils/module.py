@@ -73,7 +73,7 @@ class Module:
             return self.parameters.A_up * (
                 np.exp(-float(delta_t) / self.parameters.tau_up)
             )
-        else:  # delta_t <=0
+        else:  # delta_t <0
             return self.parameters.A_down * (
                 np.exp(float(delta_t) / self.parameters.tau_down)
             )

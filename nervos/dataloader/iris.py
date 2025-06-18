@@ -2,9 +2,10 @@
 This module implements the `IrisLoader` class, which extends the `Dataloader` 
 base class. It is specifically designed to handle the Iris dataset, providing 
 methods for:
-- Loading the dataset
-- Generating more synthetic data in the dataset
-- Converting samples into spike trains
+
+    - Loading the dataset
+    - Generating more synthetic data in the dataset
+    - Converting samples into spike trains
 
 The `IrisLoader` supports preprocessing for Spiking Neural Network (SNN) 
 training workflows.

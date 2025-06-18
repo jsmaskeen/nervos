@@ -1,14 +1,16 @@
 """
 This module implements the `CirclesLoader` class, which extends the `Dataloader` 
-base class. It is specifically designed to handle the skelarn's circle toy dataset, providing 
-methods for:
-- Loading data
-- Converting points into spike trains using gaussian receptive fields
-- Retrieving train and test data
+base class. It is specifically designed to handle scikit-learn's circle toy dataset, and 
+provides methods for:
+
+    - Loading data
+    - Converting points into spike trains using Gaussian receptive fields
+    - Retrieving train and test data
 
 The `CirclesLoader` supports preprocessing for Spiking Neural Network (SNN) 
 training workflows.
 """
+
 
 from ..utils import *
 from .loader import Dataloader
@@ -20,11 +22,12 @@ class CirclesLoader(Dataloader):
     A dataloader class specifically designed for loading and preprocessing the make_circles dataset.
 
     This class provides functionality for:
-    - Loading the dataset
-    - Normalizing coordinates
-    - Encoding coordinates into Gaussian probabilities
-    - Generating spike trains based on Poisson processes
-    - A dataloader method for retrieving data samples
+    
+        - Loading the dataset
+        - Normalizing coordinates
+        - Encoding coordinates into Gaussian probabilities
+        - Generating spike trains based on Poisson processes
+        - A dataloader method for retrieving data samples
 
     Attributes:
         parameters (Parameters): Configuration parameters for the loader.
@@ -44,11 +47,11 @@ class CirclesLoader(Dataloader):
         Initializes the CirclesLoader with given parameters.
 
         Args:
-            num_rf (tuple[int, int]): Number of receptive fields for x axis and y axis.
-            var (tuple[float, float]): Variance of gaussian receptive fields along x axis and y axis.
-            noise (float): Standard deviation of Gaussian noise added to the data.
-            factor (float): Scale factor between the inner and outer circle.
-            parameters (dict, optional): Configuration parameters for spike generation. Defaults to None.
+            parameters (Parameters): Configuration parameters for spike generation.
+            num_rf (tuple[int, int]): Number of receptive fields for the x and y axes.
+            var (tuple[float, float]): Variance of the Gaussian receptive fields along the x and y axes.
+            noise (float, optional): Standard deviation of Gaussian noise added to the data. Defaults to 0.06.
+            factor (float, optional): Scale factor between the inner and outer circle. Defaults to 0.5.
         """
         self.noise = noise
         self.factor = factor
@@ -147,7 +150,7 @@ class CirclesLoader(Dataloader):
     
     def plot_rf(self) -> None:
         """
-        Plots the receptive fields and coverd area.
+        Plots the receptive fields and covered area.
         """
         data,labels = make_circles(400,noise=self.noise,factor=self.factor)
         data+=1

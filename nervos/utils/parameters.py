@@ -15,13 +15,6 @@ class Parameters:
 
     This class allows parameters to be loaded from different sources (URL, dictionary, file),
     listed in a readable format, or saved to a JSON file.
-
-    Methods:
-        from_url(url): Load parameters from a JSON response at a given URL.
-        from_dict(parameters): Load parameters from a dictionary.
-        from_file(path): Load parameters from a JSON file.
-        list_parameters(): Print all parameters in a formatted list.
-        save(identifier, directory): Save the parameters to a JSON file.
     """
 
     def __init__(self) -> None:
@@ -69,7 +62,7 @@ class Parameters:
             print(f"{k}:{' '*(30-len(k))}{v}")
 
     def save(
-        self, identifier: str, directory: str = f"{common.cwd}\\parameters"
+        self, identifier: str, directory: str = None
     ) -> None:
         """
         Save the parameters to a JSON file.
@@ -78,6 +71,8 @@ class Parameters:
             identifier (str): A unique identifier for the saved file.
             directory (str, optional): The directory in which to save the file. Defaults to 'parameters' in the current working directory.
         """
+        if directory is None:
+            directory = f"{common.cwd}\\parameters"
         common.mkdir(directory)
         with open(f"{directory}\\parameters_{identifier}.json", "w") as f:
             f.write(json.dumps(self.__dict__, indent=4))

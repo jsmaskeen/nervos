@@ -4,3 +4,5 @@ nervos.egg-info/
 venv/
 setup.py
 *__pycache__*
+docs/*
+!docs/_build
