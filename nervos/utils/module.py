@@ -10,6 +10,68 @@ from .layer import Layer
 from .neuron import LIFNeuron
 from typing import Union
 
+from scipy.stats import truncnorm
+
+def apply_truncated_noise_vectorized(input_array: np.ndarray, half_range: float) -> np.ndarray:
+    """
+    Applies truncated normal noise to an array of values.
+
+    Args:
+        input_array (np.ndarray): The input array of values between 0 and 1.
+        half_range (float): The half-range for the noise distribution.
+
+    Returns:
+        np.ndarray: The array with noise applied, clipped to [0, 1].
+    """
+    arr = np.asarray(input_array)
+    if half_range == 0:
+        return arr.copy()
+
+    sigma = half_range / 3.0
+
+    if sigma == 0:
+        return arr.copy()
+
+    lower_bound = -half_range / sigma
+    upper_bound = half_range / sigma
+
+    noise = truncnorm.rvs(
+        lower_bound, 
+        upper_bound, 
+        loc=0.0, 
+        scale=sigma, 
+        size=arr.shape
+    )
+    noisy_array = np.clip(arr * (1.0 + noise), 0, 1)
+    
+    return noisy_array
+
+def apply_truncated_noise_to_value(value: float, half_range: float) -> float:
+    """
+    Applies truncated normal noise to a single floating-point value.
+
+    Args:
+        value (float): The input value between 0 and 1.
+        half_range (float): The half-range for the noise distribution.
+
+    Returns:
+        float: The value with noise applied, clipped to [0, 1].
+    """
+    if half_range == 0:
+        return value
+
+    sigma = half_range / 3.0
+    if sigma == 0:
+        return value
+
+    lower_bound = -half_range / sigma
+    upper_bound = half_range / sigma
+
+    noise = truncnorm.rvs(lower_bound, upper_bound, loc=0.0, scale=sigma)
+
+    noisy_value = np.clip(value * (1.0 + noise), 0, 1)
+    
+    return noisy_value
 
 class Module:
     """
@@ -30,6 +92,11 @@ class Module:
         identifier (str): Unique identifier for the module, defaulting to the timestamp `str_t0` if not provided.
         logger (Logger): Logger object for tracking and debugging operations within the module.
         wta (bool, optional): Used to use Winner-Take-All or update all synapses while doing STDP.
+        synapse_update_counts (list): Tracks the number of STDP updates for each synapse to support cycle-dependent weighting.
+        cycle_dependent_weight_lookup (list, optional): Lookup table for weight values based on update cycle counts.
+        enable_cycle_dependent_weights (bool): Flag to enable weight updates based on cycle count lookup.
+        enable_synaptic_noise (bool): Flag to enable truncated normal noise on synapse values during read.
+        noise_magnitude_half_range (float): The half-range magnitude for the synaptic noise distribution.
     """
 
     def __init__(self, parameters: Parameters, identifier: str = None) -> None:
@@ -57,6 +124,11 @@ class Module:
         self.weight_evolution = []
         self.wta = True
         self.allowed_levels = None
+        self.synapse_update_counts = []
+        self.cycle_dependent_weight_lookup = None
+        self.enable_cycle_dependent_weights = False
+        self.enable_synaptic_noise = False
+        self.noise_magnitude_half_range = 0.0
 
     def STDP(self, delta_t: int) -> float:
         """
@@ -91,6 +163,7 @@ class Module:
             Layer(self.parameters, layer_sizes[j], layer_sizes[j + 1])
             for j in range(len(layer_sizes) - 1)
         ]
+        self.synapse_update_counts = np.zeros(self.layers[0].synapses.shape)
 
     def get_all_synapses(self) -> np.ndarray:
         """
@@ -125,9 +198,14 @@ class Module:
         """
 
         if neuron.rest_until < time_step:
-            neuron.potential += np.dot(
-                synapses_for_neuron_index, spike_train_at_timestep
-            )
+            if self.enable_synaptic_noise:
+                neuron.potential += np.dot(
+                    apply_truncated_noise_vectorized(synapses_for_neuron_index, self.noise_magnitude_half_range), spike_train_at_timestep
+                )
+            else:
+                neuron.potential += np.dot(
+                    synapses_for_neuron_index, spike_train_at_timestep
+                )
 
             if neuron.potential > self.parameters.resting_potential:
                 neuron.potential -= self.parameters.spike_drop_rate
@@ -138,13 +216,15 @@ class Module:
         if in_training:
             neuron.potential_memory[time_step] = neuron.potential
     
-    def update_synapse(self, synapse_weight: float, weight_factor: float) -> float:
+    def update_synapse(self, synapse_weight: float, weight_factor: float, next_neuron_idx: int, current_neuron_idx: int) -> float:
         """
         Adjust the synapse weight using the specified weight factor.
 
         Args:
             synapse_weight (float): The current weight of the synapse.
             weight_factor (float): The adjustment factor based on STDP.
+            next_neuron_idx (int): Index of the post-synaptic neuron.
+            current_neuron_idx (int): Index of the pre-synaptic neuron.
 
         Returns:
             float: The updated synapse weight.
@@ -159,11 +239,21 @@ class Module:
             np.sign(diff) * abs(diff) ** 0.9
         )
         
+        if self.enable_cycle_dependent_weights:
+            try:
+                ls = self.cycle_dependent_weight_lookup[int(self.synapse_update_counts[next_neuron_idx][current_neuron_idx])]
+            except IndexError:
+                ls = self.cycle_dependent_weight_lookup[-1]
+            return ls[np.argmin(abs(ls-updated_wt))]
+
         if type(self.allowed_levels) != type(None):
             
             return self.allowed_levels[np.argmin(abs(self.allowed_levels-updated_wt))]
         
-        return updated_wt
+        if not self.enable_synaptic_noise:
+            return updated_wt
+        else:
+            return apply_truncated_noise_to_value(updated_wt, self.noise_magnitude_half_range)
 
     def reweigh_synapses_for_between_input_and_output_neuron(
         self,
@@ -197,8 +287,11 @@ class Module:
                     synapses[next_neuron_idx][current_neuron_idx] = self.update_synapse(
                         synapses[next_neuron_idx][current_neuron_idx],
                         self.STDP(-dt),
+                        next_neuron_idx,
+                        current_neuron_idx
                     )
                     synapse_memory[next_neuron_idx][current_neuron_idx] = 1
+                    self.synapse_update_counts[next_neuron_idx][current_neuron_idx] += 1
         if (
             synapse_memory[next_neuron_idx][current_neuron_idx] != 1
         ):  # if pre not before post in the past timeframe
@@ -209,7 +302,10 @@ class Module:
                         list(range(-1, self.parameters.past_window // 2, -1))
                     )
                 ),
+                next_neuron_idx,
+                current_neuron_idx
             )
+            self.synapse_update_counts[next_neuron_idx][current_neuron_idx] += 1
 
     def feed_forward(
         self,
@@ -389,7 +485,7 @@ class Module:
                 )
                 bar = "=" * progress + "." * (bar_length - progress)
                 print(
-                    f"\r{str(cnt).zfill(len(str(self.parameters.training_images_amount)))}/{self.parameters.training_images_amount} [{bar}]",
+                    f"\r{str(cnt).zfill(len(str(self.parameters.training_images_amount)))}/{self.parameters.training_images_amount} [{bar}] [Max cycles for one synapse: {np.max(self.synapse_update_counts)}]",
                     end="",
                 )
 
