@@ -13,6 +13,8 @@ Notebooks
    notebooks/circles.ipynb
    notebooks/iris.ipynb
    notebooks/mnist.ipynb
+   notebooks/mnist_endurance.ipynb
+   notebooks/mnist_variability.ipynb
 
 Python Scripts
 --------------
