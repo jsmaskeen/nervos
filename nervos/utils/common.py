@@ -53,7 +53,7 @@ cwd = get_cwd()
 
 def mkdir(f: str) -> None:
     """
-    Create a directory if it doesn't already exist.
+    Create a directory if it doesn't already exist. Supports nested directories.
 
     Args:
         f (str): The path of the directory to create.
@@ -61,9 +61,7 @@ def mkdir(f: str) -> None:
     Returns:
         None
     """
-    if os.path.exists(f):
-        return
-    os.mkdir(f)
+    os.makedirs(f, exist_ok=True)
 
 
 def save_model(labels: np.ndarray, synapses: np.ndarray, parameters:dict, path: str) -> None:

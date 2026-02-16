@@ -3,6 +3,7 @@ Provides the implementation of the Module class for managing and training spikin
 Includes methods for STDP learning, feed-forward processing, training, testing, and model persistence.
 """
 
+import os
 from . import common, np, plt
 from ..dataloader import Dataloader
 from .parameters import Parameters
@@ -602,16 +603,13 @@ class Module:
             accuracy (float): Accuracy on the test set after the epoch.
         """
 
-        common.mkdir(f"{common.cwd}\\storage")
-        common.mkdir( 
-            f"{common.cwd}\\storage\\{self.identifier}{'_'+self.str_t0 if self.str_t0!=self.identifier else ''}"
-        )
+        identifier_dir = f"{self.identifier}{'_'+self.str_t0 if self.str_t0!=self.identifier else ''}"
+        epoch_dir = f"Epoch_{epoch}-{round(accuracy, 3)}"
+        full_path = os.path.join(common.cwd, "storage", identifier_dir, epoch_dir)
 
-        common.mkdir(
-            f"{common.cwd}\\storage\\{self.identifier}{'_'+self.str_t0 if self.str_t0!=self.identifier else ''}\\Epoch_{epoch}-{round(accuracy,3)}"
-        )
+        os.makedirs(full_path, exist_ok=True)
 
-        model_path = f"{common.cwd}\\storage\\{self.identifier}{'_'+self.str_t0 if self.str_t0!=self.identifier else ''}\\Epoch_{epoch}-{round(accuracy,3)}\\model.red"
+        model_path = os.path.join(full_path, "model.red")
 
         common.save_model(neuron_label_map, synapses, self.parameters, model_path)
 

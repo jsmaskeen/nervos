@@ -4,6 +4,7 @@ The class provides methods for loading parameters from a URL, dictionary, or fil
 and saving them to a JSON file.
 """
 
+import os
 import json
 import requests
 from . import common
@@ -72,7 +73,8 @@ class Parameters:
             directory (str, optional): The directory in which to save the file. Defaults to 'parameters' in the current working directory.
         """
         if directory is None:
-            directory = f"{common.cwd}\\parameters"
+            directory = os.path.join(common.cwd, "parameters")
         common.mkdir(directory)
-        with open(f"{directory}\\parameters_{identifier}.json", "w") as f:
+        file_path = os.path.join(directory, f"parameters_{identifier}.json")
+        with open(file_path, "w") as f:
             f.write(json.dumps(self.__dict__, indent=4))
