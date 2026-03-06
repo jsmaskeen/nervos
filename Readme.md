@@ -2,6 +2,8 @@
 
 ## A Spiking Neural Network Simulation Framework
 
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/nervos?period=total&units=NONE&left_color=BLUE&right_color=GREEN&left_text=Install%20Count)](https://pypi.org/project/nervos/)
+
 **Nervos** is a flexible and customizable tool designed to simulate simple Spiking Neural Networks (SNNs). Developed under the supervision of Prof. Sandip Lashkare at IIT Gandhinagar, it provides a platform for experimenting with biological neuron models, learning rules, and hardware constraints.
 
 **Documentation:** [https://nervos.readthedocs.io/](https://nervos.readthedocs.io/)
