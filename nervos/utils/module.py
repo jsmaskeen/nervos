@@ -130,6 +130,7 @@ class Module:
         self.enable_cycle_dependent_weights = False
         self.enable_synaptic_noise = False
         self.noise_magnitude_half_range = 0.0
+        self.true_lif = False
 
     def STDP(self, delta_t: int) -> float:
         """
@@ -209,9 +210,18 @@ class Module:
                 )
 
             if neuron.potential > self.parameters.resting_potential:
-                neuron.potential -= self.parameters.spike_drop_rate
+                if self.true_lif:
+                    diff = (neuron.potential - self.parameters.resting_potential) / self.parameters.tau_m
+                else:
+                    diff = self.parameters.spike_drop_rate
+                neuron.potential-=diff
+                
                 if neuron.adaptive_threshold > self.parameters.spike_threshold:
-                    neuron.adaptive_threshold -= self.parameters.threshold_drop_rate
+                    if self.true_lif:
+                        diff = (neuron.adaptive_threshold - self.parameters.spike_threshold) / self.parameters.tau_threshold
+                    else:
+                        diff = self.parameters.threshold_drop_rate
+                    neuron.adaptive_threshold -= diff
 
             current_potentials[neuron_index] = neuron.potential
         if in_training:
