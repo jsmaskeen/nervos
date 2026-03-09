@@ -8,7 +8,7 @@ Welcome to Nervos
 
 Welcome to the documentation for **nervos**.
 
-- Version: 0.0.5
+- Version: 0.0.7
 - Author: Jaskirat Singh Maskeen
 
 This site contains the auto-generated API documentation along with examples.
